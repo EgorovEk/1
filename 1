@@ -1,0 +1,41 @@
+﻿// switch_case_0.cpp
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+// Особое значение "бесконечное количество корней".
+const int INFINITE_ROOTS = -1;
+
+// Решаем уравнение ax + b = 0.
+// Функция возвращает "количество корней".
+// Корень записывает по ссылке root.
+int solve_linear(double a, double b, double &root)
+{
+  if (a == 0)
+    return b == 0? INFINITE_ROOTS: 0;
+  root = -b / a;
+  return 1;
+}
+
+int main()
+{
+  cout << "Solving ax + b = 0, enter a, b:\n";
+  cout.precision(16);
+  for (double a, b, x; cin >> a >> b;)
+  {
+    const int roots = solve_linear(a, b, x);
+    switch (roots)
+    {
+    case 0:
+      cout << "no roots\n";
+      break;
+    case INFINITE_ROOTS:
+      cout << "any number is a root\n";
+      break;
+    default: // один корень, записан в x
+      cout << "x == " << x << endl;
+    }
+  }
+
+  return EXIT_SUCCESS;
+}
